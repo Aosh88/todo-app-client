@@ -4,7 +4,7 @@ function App() {
   const [todos, setTodos] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/todos')
+    fetch('https://todo-app-server-tv0p.onrender.com/todos')
       .then((res) => res.json())
       .then((data) => setTodos(data))
   }, [])
@@ -12,7 +12,7 @@ function App() {
   const [newTodoText, setNewTodoText] = useState('')
 
 function handleAddTodo() {
-  fetch('http://localhost:3000/todos', {
+  fetch('https://todo-app-server-tv0p.onrender.com/todos', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: newTodoText })
@@ -24,7 +24,7 @@ function handleAddTodo() {
     })}
 
 function handleDeleteTodo(id) {
-  fetch(`http://localhost:3000/todos/${id}`, {
+  fetch(`https://todo-app-server-tv0p.onrender.com/todos/${id}`, {
     method: 'DELETE'
   })
     .then(() => {
@@ -33,7 +33,7 @@ function handleDeleteTodo(id) {
 }
 
 function handleUpdateTodo(id, newText) {
-  fetch(`http://localhost:3000/todos/${id}`, {
+  fetch(`https://todo-app-server-tv0p.onrender.com/todos/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({completed: !todos.find((todo) => todo.id === id).completed})
@@ -52,7 +52,7 @@ function handleUpdateTodo(id, newText) {
         <li key={todo.id}>
           {todo.text} 
           <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-          <button onClick={() => handleUpdateTodo(todo.id, todo.text)}>Toggle Complete</button>
+          <input type="checkbox" checked={todo.completed} onChange={() => handleUpdateTodo(todo.id, todo.text)} /> Toggle Complete
         </li>
         
         ))}
